@@ -12,8 +12,11 @@ class EducationForm(ModelForm):
     def clean(self):
         cleaned_data = super().clean()
         cleaned_completion_date = cleaned_data.get('completion_date', None)
-        cleaned_start_date = cleaned_data.get('start_date')
+        cleaned_start_date = cleaned_data.get('start_date', None)
         cleaned_ongoing = cleaned_data.get('ongoing')
+
+        if not cleaned_start_date:
+            raise ValidationError("Education start date not provided.")
 
         if not cleaned_ongoing:
             if not cleaned_completion_date:

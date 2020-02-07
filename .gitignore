@@ -2,3 +2,7 @@
 .git/
 db.sqlite3
 resume_builder/__pycache__/
+user_profile/__pycache__/
+user_profile/migrations/__pycache__/
+testapp/__pycache__/
+testapp/__init__.py/

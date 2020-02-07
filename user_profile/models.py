@@ -16,11 +16,11 @@ class EducationDateField(DateField):
     default_validators = [validate_education_date]
 
 
-class Education(models):
-    institute = models.CharField(blank=False, null=False)
-    level = models.CharField(blank=False, null=False)
-    faculty = models.CharField(blank=False, null=False)
-    start_date = EducationDateField(blank=False, null=False)
+class Education(models.Model):
+    institute = models.CharField(blank=False, null=False, max_length=300)
+    level = models.CharField(blank=False, null=False, max_length=50)
+    faculty = models.CharField(blank=False, null=False, max_length=300)
+    start_date = EducationDateField()
     ongoing = models.BooleanField(default=False)
-    completion_date = EducationDateField(blank=True)
+    completion_date = EducationDateField()
 
