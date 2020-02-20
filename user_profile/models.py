@@ -15,4 +15,4 @@ class User(AbstractUser):
     linkedin_profile = models.URLField(max_length=200, validators=[URLValidator])
     personal_website = models.URLField(max_length=200, validators=[URLValidator])
 
-    REQUIRED_FIELDS = ['email', 'address']
+    REQUIRED_FIELDS = ['email']
