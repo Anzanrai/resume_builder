@@ -1,7 +1,7 @@
 from django.core.exceptions import ValidationError
 from django.forms import ModelForm
 
-from resume_builder.user_profile.models import Education
+from .models import Education
 
 
 class EducationForm(ModelForm):
