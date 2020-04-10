@@ -1,10 +1,12 @@
 from django.contrib.auth import authenticate, login
 from django.http import HttpResponse
 from django.shortcuts import render
-
-# Create your views here.
 from .forms import RegisterForm, LoginForm
 from .models import User
+from django.views.generic import CreateView, ListView
+
+from .forms import EducationForm
+from .models import Education
 
 
 def RegisterView(request):
@@ -32,3 +34,23 @@ def LoginView(request):
             user = authenticate(request, username=email, password=password)
             if user is not None:
                 login(request, user)
+
+
+def index(request):
+    return HttpResponse("I hope this works.")
+
+
+def education_creation_view(request):
+    if request.method == 'POST':
+        form = EducationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponse("Education data has been successfully added.")
+    else:
+        form = EducationForm()
+    return render(request, 'education_template.html', {'form': form})
+
+
+class EducationListView(ListView):
+    model = Education
+    paginate_by = 20
