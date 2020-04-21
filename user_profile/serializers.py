@@ -3,7 +3,7 @@ from rest_framework import serializers
 from user_profile.models import User
 
 
-class UserSerializer(serializers.ModelSerializer):
+class UserRegistrationSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
@@ -23,3 +23,16 @@ class UserSerializer(serializers.ModelSerializer):
         return user
 
 
+class UserPasswordResetSerializer(serializers.Serializer):
+    email = serializers.EmailField()
+
+
+class UserPasswordResetDoneSerializer(serializers.Serializer):
+    password = serializers.CharField()
+    password2 = serializers.CharField()
+
+
+class UserPasswordChangeSerializer(serializers.Serializer):
+    current_password = serializers.CharField()
+    new_password = serializers.CharField()
+    new_password2 = serializers.CharField()
