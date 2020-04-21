@@ -31,7 +31,6 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'user_profile',
     'testapp',
     'django_extensions',
     'django.contrib.admin',
@@ -40,7 +39,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # 'user_profile.apps.UserProfileConfig',
+
+    'rest_framework',
+    'rest_framework.authtoken',
+    'user_profile',
 ]
 
 MIDDLEWARE = [
@@ -73,6 +75,12 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'resume_builder.wsgi.application'
 
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    )
+}
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
@@ -132,3 +140,11 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 AUTH_USER_MODEL = 'user_profile.User'
+
+
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'asminrai7@gmail.com'
+EMAIL_HOST_PASSWORD = 'dndizwslmxyzceru'
+EMAIL_USE_TLS = True
+EMAIL_USE_SSL = False
