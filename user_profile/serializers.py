@@ -36,3 +36,13 @@ class UserPasswordChangeSerializer(serializers.Serializer):
     current_password = serializers.CharField()
     new_password = serializers.CharField()
     new_password2 = serializers.CharField()
+
+
+class UserSerializer(serializers.HyperlinkedModelSerializer):
+    # users = serializers.HyperlinkedRelatedField(many=True, view_name='user_detail', read_only=True)
+
+    class Meta:
+        model = User
+        # fields = ('url', 'id', 'username', 'email', 'user_type', 'phone_number', 'posts')
+        fields = ('id', 'first_name', 'last_name', 'username', 'email', 'phone_number', 'address',
+                  'linkedin_profile', 'personal_website')

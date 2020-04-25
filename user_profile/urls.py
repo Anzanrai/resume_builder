@@ -13,4 +13,7 @@ urlpatterns = [
     path('password_reset/', api_views.passwordreset_view, name='password_reset'),
     re_path('password_reset_done/(?P<uid>[0-9A-Za-z]+)/(?P<token>[0-9A-Za-z]{1,40})/$', api_views.passwordresetdone_view, name='password_reset_done'),
     path('password_change/', api_views.PasswordChangeView.as_view(), name='password_change'),
+    path('users/', api_views.UserList.as_view(), name='user_list'),
+    path('users/<int:pk>/', api_views.UserDetail.as_view(), name='user_detail'),
+
 ]

@@ -8,12 +8,13 @@ from rest_framework import generics, status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.decorators import api_view
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, IsAdminUser
 
+from .permissions import IsOwnerOrReadonly
 from .tokens import TokenGenerator
 from .models import User
 from .serializers import UserRegistrationSerializer, UserPasswordResetSerializer, UserPasswordResetDoneSerializer, \
-    UserPasswordChangeSerializer
+    UserPasswordChangeSerializer, UserSerializer
 
 
 class RegistrationView(generics.CreateAPIView):
@@ -107,3 +108,19 @@ class PasswordChangeView(APIView):
                 return Response("Current password Doesn't match with your password!")
         else:
             return Response(serializer.errors)
+
+
+class UserList(generics.ListAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+    permission_classes = (IsAuthenticated, IsAdminUser)
+
+
+class UserDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+    permission_classes = (IsAuthenticated, IsOwnerOrReadonly)
+
+    def update(self, request, *args, **kwargs):
+        response = super(UserDetail, self).update(request, *args, **kwargs)
+        return response
